@@ -1,0 +1,63 @@
+// BUDGET CONTROLLER
+let budgetController = (function() {
+
+    
+})();
+
+
+// UI CONTROLLER
+let UIController = (function() {
+
+    let DOMstrings = {
+        inputType: '.add__type',
+        inputDesc: '.add__description',
+        inputVal: '.add__value',
+        inputBtn: '.add__btn'
+    }
+
+    return {
+        getInput: function(){
+            return {
+                type : document.querySelector(DOMstrings.inputType).value,
+                description : document.querySelector(DOMstrings.inputDesc).value,
+                value : document.querySelector(DOMstrings.inputVal).value
+            }
+        },
+        
+        getDOMstrings: function() {
+            return DOMstrings;
+        }
+    }
+
+})();
+
+
+// GLOBAL APP CONTROLLER
+let controller = (function(budgetCtrl, UICtrl) {
+
+    let setupEventListeners = function() {
+        let DOM = UICtrl.getDOMstrings();
+
+        document.querySelector(DOM.inputBtn).addEventListener('click', ctrlAddItem());
+
+        document.addEventListener('keypress', function(event) {
+            if (event.keyCode == 13 || event.which == 13) ctrlAddItem();
+        });
+    }
+    
+
+    let ctrlAddItem = function() {
+
+        let input = UICtrl.getInput();
+    }
+
+    return {
+        init: function() {
+            setupEventListeners();
+        }
+    }
+
+})(budgetController, UIController);
+
+
+controller.init();
