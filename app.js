@@ -165,16 +165,15 @@ let UIController = (function() {
         num = num.toFixed(2);
 
         numSplit = num.split('.');
-        int = numSplit[0];
-        if (int.length > 3) {
-            int = int.substr(0, int.length - 3) + ',' + int.substr(int.length - 3, 3)
-        }
+        [int, dec] = numSplit;
 
-        dec = numSplit[1];
+        if (int.length > 3) {
+            int = `${int.substr(0, int.length - 3)},${int.substr(int.length - 3, 3)}`;
+        }
 
         sign = (type == 'exp') ? '-' : '+';
 
-        return sign + ' ' + int + '.' + dec;
+        return `${sign} ${int}.${dec}`;
 
     };
 
@@ -282,9 +281,7 @@ let UIController = (function() {
         changedType: function() {
 
             let fields = document.querySelectorAll(
-                DOMstrings.inputType + ',' +
-                DOMstrings.inputDesc + ',' +
-                DOMstrings.inputVal
+                `${DOMstrings.inputType},${DOMstrings.inputDesc},${DOMstrings.inputVal}`
             );
 
             nodeListForEach(fields, function(cur) {
@@ -380,6 +377,7 @@ let controller = (function(budgetCtrl, UICtrl) {
         if (itemID) {
 
             splitID = itemID.split('-');
+            
             type = splitID[0];
             ID = +splitID[1];
 
