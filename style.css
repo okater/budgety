@@ -8,22 +8,19 @@
     box-sizing: border-box;
 }
 
-.clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
 body {
     color: #555;
     font-family: Open Sans;
     font-size: 16px;
     position: relative;
-    height: 100vh;
+    /*height: 100vh;*/
     font-weight: 400;
 }
 
-.right { float: right; }
+.right {
+    display: flex;
+    flex-wrap: nowrap;
+}
 .red { color: #FF5049 !important; }
 .red-focus:focus { border: 1px solid #FF5049 !important; }
 
@@ -40,8 +37,11 @@ body {
 }
 
 .budget {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     width: 350px;
+    max-width: 90vw;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -65,6 +65,9 @@ body {
 
 .budget__income,
 .budget__expenses {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     padding: 12px;
     text-transform: uppercase;
 }
@@ -120,6 +123,10 @@ body {
 }
 
 .add__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     margin: 0 auto;
     text-align: center;
 }
@@ -149,7 +156,18 @@ body {
     transition: border 0.3s;
 }
 
-.add__description { width: 400px;}
+.add__description { 
+    width: 400px;
+    max-width: 50%;
+}
+
+@media (max-width: 400px) {
+    .add__description {
+        max-width: 95%;
+    }
+
+}
+
 .add__value { width: 100px;}
 
 .add__btn {
@@ -177,19 +195,53 @@ body {
 
 /***** LISTS *****/
 .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     width: 1000px;
+    max-width: 100%;
     margin: 60px auto;
+
+}
+
+@media (max-width: 650px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+}
+
+.income,
+.expenses {
+    width: 475px;
+    max-width: 45vw;
+}
+
+@media (max-width: 650px) {
+    .income,
+    .expenses {
+        max-width: 95%;
+    }
+
 }
 
 .income {
-    float: left;
-    width: 475px;
     margin-right: 50px;
 }
 
-.expenses {
-    float: left;
-    width: 475px;
+@media (max-width: 900px) {
+    .income {
+        margin-right: 30px;
+    }
+
+}
+@media (max-width: 650px) {
+    .income {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+
 }
 
 h2 {
@@ -203,6 +255,9 @@ h2 {
 .expenses__title { color: #FF5049; }
 
 .item {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
     padding: 13px;
     border-bottom: 1px solid #e7e7e7;
 }

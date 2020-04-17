@@ -199,10 +199,10 @@ let UIController = (function() {
             // Create HTML string with placeholder text
             if (type == 'inc') {
                 element = DOMstrings.incomeContainer;
-                html = '<div class="item clearfix" id="inc-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+                html = '<div class="item" id="inc-%id%"><div class="item__description">%description%</div><div class="right"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
             } else if (type == 'exp') {
                 element = DOMstrings.expensesContainer;
-                html = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+                html = '<div class="item" id="exp-%id%"><div class="item__description">%description%</div><div class="right"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
             }
 
             // Replace the placeholder text with some actual data
@@ -272,6 +272,11 @@ let UIController = (function() {
             year = now.getFullYear();
 
             document.querySelector(DOMstrings.dateLabel).textContent = month + ' ' + year;
+        },
+
+        removeData: function() {
+            document.querySelector('.income__list').innerHTML = '';
+            document.querySelector('.expenses__list').innerHTML = '';
         },
 
         changedType: function() {
@@ -397,6 +402,7 @@ let controller = (function(budgetCtrl, UICtrl) {
                 totalExp: 0,
                 percentage: -1
             });
+            UICtrl.removeData();
             setupEventListeners();
         }
     }
